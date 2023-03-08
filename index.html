@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-32x32.png">
+    <link rel="stylesheet" href="style.css">
+    <title>Roadmap dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+</head>
+<body>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+          <li class="breadcrumb-item"><a href="#">Senarai</a></li>
+        </ol>
+    </nav>
+    <div class="container">
+        <div class="row grey p-5">
+                <h5 class="card-title">Dashboard Roadmap</h5>
+                <canvas id="chartAll"></canvas>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="./node_modules/chartjs-chart-treemap/dist/chartjs-chart-treemap.js"></script>
+                <script>
+                    const DATA = [
+                        {
+                            what: 'Penyediaan Kertas Cadangan/ Permohonan Peruntukan',
+                            value: 98,
+                            color: 'rgba(68,115,197,255)',
+                        },
+                        {
+                            what: 'Pelantikan Rakan Strategik',
+                            value: 75,
+                            color: 'rgba(232,120,39,255)',
+                        },
+                        {
+                            what: 'Laporan Insepsi',
+                            value: 69,
+                            color: 'rgba(211,205,208,255)',
+                        },
+                        {
+                            what: 'Laporan Interim',
+                            value: 55,
+                            color: 'rgba(255,255,1,255)',
+                        },
+                        {
+                            what: 'Draf Laporan Akhir',
+                            value: 49,
+                            color: 'rgba(21,161,200,255)',
+                        },
+                        {
+                            what: 'Laporan Akhir',
+                            value: 35,
+                            color: 'rgba(146,209,79,255)',
+                        },
+                        {
+                            what: 'Kelulusan/Pelancaran',
+                            value: 15,
+                            color: 'rgba(31,78,120,255)',
+                        },
+                        {
+                            what: 'Pelaksanaan',
+                            value: 15,
+                            color: 'rgba(132,60,12,255)',
+                        }
+                    ];
+                    
+                    const data = {
+                        datasets: [
+                            {
+                                label: '15 Dasar / Hala Tuju',
+                                tree: DATA,
+                                key: 'value',
+                                borderWidth: 1,
+                                spacing: 3,
+                                backgroundColor(ctx) {
+                                if (ctx.type !== 'data') {
+                                    return 'transparent';
+                                }
+                                    return ctx.raw._data.color;
+                                },
+                            
+                                labels: {
+                                    align: 'center',
+                                    display: true,
+                                    formatter(ctx) {
+                                    if (ctx.type !== 'data') {
+                                        return;
+                                    }
+                                    return [ctx.raw._data.what, 'Kiraan ' + ctx.raw.v];
+                                    },
+                                    color: ['black', 'Ebony'],
+                                    font: [{size: 20, weight: 'bold'}, {size: 12}],
+                                    position: 'mid'
+                                },
+                            }   
+                        ],
+                            
+                    };
+                        
+                    
+                    
+                    const config = {
+                        type: 'treemap',
+                        data: data,
+                        options: {
+                            events: [],
+                            plugins: {
+                              title: {
+                                display: true,
+                                text: '15 Dasar/ Hala Tuju',
+                                color: 'black'
+                              },
+                              legend: {
+                                display: false
+                              },
+                              tooltip: {
+                                enabled: false
+                              }
+                            }
+                        }
+                    };
+
+                    const ctx = document.getElementById('chartAll');
+
+                    new Chart(ctx,config);
+
+                </script>
+        </div>
+        <div class="row">
+            <div class="col-7 red">
+                <h5 class="card-title">Carta Pai</h5>
+                <canvas id="chartSatu"></canvas>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
+                <script>
+                    const data2 = {
+                        labels: [
+                          'Penyediaan Kertas Cadangan/ Permohonan Peruntukan',
+                          'Pelantikan Rakan Strategik',
+                          'Laporan Insepsi',
+                          'Laporan Interim',
+                          'Draf Laporan Akhir',
+                          'Laporan Akhir',
+                          'Kelulusan/Pelancaran',
+                          'Pelaksanaan',
+                        ],
+                        datasets: [{
+                          label: 'My First Dataset',
+                          data: [70, 10, 10,70,10,130,270,460],
+                          backgroundColor: [
+                            'rgba(68,115,197,255)',
+                            'rgba(232,120,39,255)',
+                            'rgba(211,205,208,255)',
+                            'rgba(255,255,1,255)',
+                            'rgba(21,161,200,255)',
+                            'rgba(146,209,79,255)',
+                            'rgba(31,78,120,255)',
+                            'rgba(132,60,12,255)',
+                          ],
+                          hoverOffset: 4,
+                          datalabels: {
+                            
+                            labels:{
+                                value: {
+                                    color: 'black',
+                                    textStrokeColor:'white',
+                                    textStrokeWidth: 1,
+                                    font: {
+                                        weight:'bold',
+                                        size: 16,
+                                        position: 'top'
+                                    },
+                                },
+                            }
+                          }
+                        }]
+                    };
+    
+                    const config2 = {
+                        type: 'doughnut',
+                        plugins: [ChartDataLabels],
+                        options: {
+                            plugins: {
+                                tooltip : {enabled:false,},
+                                legend : {display:'true',position:'right',align:'start'}
+                            }  
+                        },
+                        data: data2,
+                    };
+
+                    const ctx2 = document.getElementById('chartSatu');
+    
+                    new Chart(ctx2,config2);
+                </script>
+            </div>
+            <div class="col-5 blue p-5">
+                <h5 class="card-title pb-5">Peratusan (%) Jumlah Peruntukan</h5>
+                <canvas id="chartDua"></canvas>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script src="./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.min.js"></script>
+            </div>
+            <script>
+                
+
+                const data3 = {
+                    labels: [
+                      'Lain-lain',
+                      'DE',
+                      'OE'
+                    ],
+                    datasets: [{
+                      label: 'Peratusan (%) Jumlah Peruntukan',
+                      data: [15, 65, 20],
+                      backgroundColor: [
+                        'rgba(7,173,241,255)',
+                        'rgba(1,32,99,255)',
+                        'rgba(0,177,80,255)',
+                      ],
+                      hoverOffset: 4,
+                      datalabels: {
+                        textStrokeColor:'white',
+                        textStrokeWidth: 1,
+                        labels: {
+                            name: {
+                                color: 'black',
+                                align: 'top',
+                                font: {size: 22,weight: 'bold'},
+                                formatter: function(value, ctx) {
+                                    return ctx.chart.data.labels[ctx.dataIndex];
+                                }
+                            },
+                            value: {
+                                color: 'white',
+                                textStrokeWidth: null,
+                                font: {
+                                    weight:'bold',
+                                    size: 16
+                                }
+                            }
+                        },
+                      }
+                    }]
+                };
+
+                const config3 = {
+                    type: 'doughnut',
+                    plugins:[ChartDataLabels],
+                    options : {
+                        cutout:150,
+                        plugins: {
+                            tooltip : {enabled:false,},
+                            legend : {display:false,}
+                        }
+                    },
+                    data: data3,
+                };
+
+                const ctx3 = document.getElementById('chartDua')
+
+                new Chart(ctx3,config3);
+            </script>
+        </div>
+    </div>
+    
+    <!--JS-->
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+</body>
+</html>
