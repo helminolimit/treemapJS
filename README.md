@@ -2,4 +2,4 @@
 chartJS
 
 #free to use
-#more documetation please refer to official website!
+#more documentation please refer to official website!
